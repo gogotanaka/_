@@ -21,21 +21,24 @@ require 'kasen'
 
 note: you can use `k` instead of `_` in IRB.
 
-## Installation
+## Doc
 
-Add this line to your application's Gemfile:
+### Installation
+Have it your way.
 
-```ruby
-gem 'kasen'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+    $ echo "gem 'kasen'" >> Gemfile; bundle
+    
+    or
 
     $ gem install kasen
+    
+### What dose `_`(`Kernel#_`) do?
+
+`_`(`Kernel#_`) just returns empty object `Kasen.new`, all of which methods has been undefined expect for `Kasen#to_proc`, `Kasen#method_missing`.
+
+and say, when `_` call `#to_i`(`_.to_i`), `Kasen#method_missing` store context(method_name, args, blokc) recursively.
+
+And finnaly `Kasen#to_proc` returns all contexts as a block.
 
 ## Development
 

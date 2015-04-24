@@ -1,5 +1,8 @@
 # Kasen
 
+[![Gem Version](https://badge.fury.io/rb/kasen.svg)](http://badge.fury.io/rb/kasen)
+[![Build Status](https://travis-ci.org/gogotanaka/_.svg)](https://travis-ci.org/gogotanaka/_)
+
 ![kasen.png](https://qiita-image-store.s3.amazonaws.com/0/30440/7ac5c816-ad6d-dd62-1783-a2c435455fde.png)
 
 下線(Kasen) ... Underscore.

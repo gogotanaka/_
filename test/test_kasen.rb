@@ -17,4 +17,26 @@ class TestKasen < Minitest::Test
       [['1', '2'], ['3', '4']].map(&k.select(&k.to_i.eql?(1)))
     )
   end
+
+  def setup
+    @ary = [1, 2, 3]
+    @arys = [[1, 2], [3, 4]]
+  end
+
+  def test_main
+    t1 = @ary.map &k.to_s
+    assert_equal @ary.map(&:to_s), t1
+
+    t2 = @ary.map &k.+(1)
+    assert_equal @ary.map { |n| n + 1 }, t2
+
+    t3 = @ary.map &k.+(1).-(2)
+    assert_equal @ary.map { |n| n + 1 - 2 }, t3
+
+    t4 = @ary.select &k.>(1)
+    assert_equal @ary.select { |n| n > 1 }, t4
+
+    t5 = @arys.each &k.map!(&k.to_s)
+    assert_equal @arys.each { |ary| ary.map! { |n| n.to_s } }, t5
+  end
 end

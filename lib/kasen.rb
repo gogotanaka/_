@@ -22,18 +22,15 @@ class Kasen
   end
 
   def to_proc
-    Proc.new { |o|
-      @_calling_methods.each do |calling_method|
-        o = calling_method.call(o)
+    Proc.new do |o|
+      @_calling_methods.inject(o) do |m, calling_method|
+        calling_method.(m)
       end
-      o
-    }
+    end
   end
 
   def method_missing(name, *args, &block)
-    @_calling_methods << Proc.new { |o|
-      o.send(name, *args, &block)
-    }
+    @_calling_methods << Proc.new { |o| o.send(name, *args, &block) }
     self
   end
 end

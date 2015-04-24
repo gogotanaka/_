@@ -18,19 +18,16 @@ class Kasen
   end
 
   def initialize
-    @_calling_methods = []
+    @__kasen__ = Proc.new { |o| o }
   end
 
   def to_proc
-    Proc.new do |o|
-      @_calling_methods.inject(o) do |m, calling_method|
-        calling_method.(m)
-      end
-    end
+    @__kasen__
   end
 
   def method_missing(name, *args, &block)
-    @_calling_methods << Proc.new { |o| o.send(name, *args, &block) }
+    __kasen__ = @__kasen__
+    @__kasen__ = Proc.new { |o| (__kasen__.(o)).send(name, *args, &block) }
     self
   end
 end

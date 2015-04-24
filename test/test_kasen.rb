@@ -24,6 +24,9 @@ class TestKasen < Minitest::Test
   end
 
   def test_main
+    t0 = @ary.map &k
+    assert_equal @ary, t0
+
     t1 = @ary.map &k.to_s
     assert_equal @ary.map(&:to_s), t1
 

@@ -12,11 +12,11 @@ require 'kasen'
 
 ['0', '1', '2'].select &_.to_i.zero?
 # is equivalent for
-['0', '1', '2'].select { |s| s.to_i.zero? },
+['0', '1', '2'].select { |s| s.to_i.zero? }
 
-[['1', '2'], ['3', '4']].map { |ary| ary.select { |n| n.to_i.eql?(1) } },
+[['1', '2'], ['3', '4']].map { |ary| ary.select { |n| n.to_i.eql?(1) } }
 # is equivalent for
-[['1', '2'], ['3', '4']].map(&_.select(&_.to_i.eql?(1)))
+[['1', '2'], ['3', '4']].map &_.select(&_.to_i.eql?(1))
 ```
 
 note: you can use `k` instead of `_` in IRB.
@@ -27,11 +27,11 @@ note: you can use `k` instead of `_` in IRB.
 Have it your way.
 
     $ echo "gem 'kasen'" >> Gemfile; bundle
-    
-    or
+
+or
 
     $ gem install kasen
-    
+
 ### What dose `_`(`Kernel#_`) do?
 
 `_`(`Kernel#_`) just returns empty object `Kasen.new`, all of which methods has been undefined expect for `Kasen#to_proc`, `Kasen#method_missing`.

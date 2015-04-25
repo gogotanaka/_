@@ -9,20 +9,33 @@
 
 ```ruby
 require 'kasen'
+
 [[1, 2], [3, 4]].map &_[1]
-# is equivalent for
-[[1, 2], [3, 4]].map { |ary| ary[1] }
+#=> [2, 4]
+# is equivalent for [[1, 2], [3, 4]].map { |ary| ary[1] }
 
-['0', '1', '2'].select &_.to_i.zero?
+&_.to_i.zero?
 # is equivalent for
-['0', '1', '2'].select { |s| s.to_i.zero? }
+{ |s| s.to_i.zero? }
 
-[['1', '2'], ['3', '4']].map { |ary| ary.select { |n| n.to_i.eql?(1) } }
+&_.select(&_.to_i.eql?(1))
 # is equivalent for
-[['1', '2'], ['3', '4']].map &_.select(&_.to_i.eql?(1))
+{ |ary| ary.select { |n| n.to_i.eql?(1) } }
 ```
 
+calling any method with `_` produces `Proc` object which is equivalent for calling methods in `Proc` body.
+
 note: you can use `k` instead of `_` in IRB.
+
+```ruby
+['0', '1', '2'].select &_.to_i.zero?
+#=> ["0"]
+# is equivalent for ['0', '1', '2'].select { |s| s.to_i.zero? }
+
+[['1', '2'], ['3', '4']].map &_.select(&_.to_i.eql?(1))
+#=> [["1"], []]
+# is equivalent for [['1', '2'], ['3', '4']].map { |ary| ary.select { |n| n.to_i.eql?(1) } }
+```
 
 ## Doc
 
